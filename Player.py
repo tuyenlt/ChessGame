@@ -13,6 +13,7 @@ class Player:
             self.whiteInit()
         if color == "black" :
             self.blackInit()
+        self.onCheckMate = False
             
     def whiteInit(self):
         for x,y in WHITE_PAWN_SPAWN:
@@ -64,6 +65,7 @@ class Player:
         return False
     
     def getMoveWhileIsChecking(self,nextPlayer):
+        self.onCheckMate = True
         for piece in self.pieces:
             piece.getMoveAblePos()
             pre_x = piece.x
@@ -75,12 +77,13 @@ class Player:
                 currBoxState = self.broad.box[x][y].placed
                 if self.broad.box[x][y].placed != None:
                     self.broad.box[x][y].placed.disable = True
-                piece.moveTo(self.broad.box[x][y],prevBoxState)        
+                piece.moveTo(self.broad.box[x][y],prevBoxState,False)        
                 if self.setIsChecking(nextPlayer) == False:
                     newMoveAblePos.append((x,y))        
+                    self.onCheckMate = False
                     
                 if (x,y) == piece.moveAblePos[-1]:
-                    piece.moveTo(self.broad.box[pre_x][pre_y])
+                    piece.moveTo(self.broad.box[pre_x][pre_y],None,False)
                 self.broad.box[x][y].placed = currBoxState
                 prevBoxState = currBoxState
                 if self.broad.box[x][y].placed != None:

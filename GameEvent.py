@@ -15,6 +15,7 @@ class GameState():
         self.countDown = 1200
         self.chossingPiece = None
         self.boxClicked = None
+        self.winner = None
     
     def swapTurn(self):
         self.isChossing = False
@@ -42,7 +43,9 @@ class GameState():
             piece.getMoveAblePos()
             if (nextPlayer.king.x , nextPlayer.king.y) in piece.moveAblePos:
                 nextPlayer.isChecking = True
-        
+        nextPlayer.getMoveWhileIsChecking(currentPlayer)
+        if nextPlayer.onCheckMate:
+            self.winner = currentPlayer.color    
         self.swapTurn()    
         
     

@@ -2,6 +2,8 @@ import pygame
 from broad import *
 import math
 
+from utils import toChessMove
+
 class Chesspiece():
     broad = None
     def __init__(self,spawnX,spawnY,color = "white"):
@@ -25,12 +27,14 @@ class Chesspiece():
         else :
             return False
         
-    def moveTo(self,box,pre = None):
+    def moveTo(self,box,pre = None,log = True):
         self.rect = box.rect
         self.broad.box[self.x][self.y].placed = pre
-        print(f"before {self.x} -- {self.y}", end = "  ")
+        if log :
+            print(f"{self.color} : {type(self).__name__} {toChessMove((self.x,self.y))} to ",end="")
         self.x , self.y = box.chesspos
-        print(f"after {self.x} -- {self.y}")
+        if log :
+            print(f"{type(self).__name__} {toChessMove(box.chesspos)}")
         self.broad.box[self.x][self.y].placed = self
         self.moved = True
     
