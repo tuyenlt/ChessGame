@@ -3,7 +3,7 @@ SRC_HEIGHT = 1000
 
 BLACK_PAWN_SPAWN = [(0,1),(1,1),(2,1),(3,1),(4,1),(5,1),(6,1),(7,1)]
 WHITE_PAWN_SPAWN = [(0,6),(1,6),(2,6),(3,6),(4,6),(5,6),(6,6),(7,6)]
-BLACK_CATSLE = [(5,0),(6,0)]
+BLACK_SHORT_CATSLE = [(5,0),(6,0)]
 WHITE_CATSLE = [(5,7),(6,7)]
 
 COLOR_WHITE = (255,255,255)

@@ -1,14 +1,13 @@
 import pygame
 from pygame.locals import *
 from GameConfig import *
-from Chesspiece import Chesspiece
 
 
 class Box:
     def __init__(self,box_size=100,pos_x=0,pos_y=0,color=COLOR_WHITE,placed = False):  
         self.rect = pygame.Rect(0,0,box_size,box_size)
         self.rect.center = (pos_x,pos_y)
-        self.placed = ""
+        self.placed = None
         self.color = color
         self.clicked = False
         self.chesspos = (0,0)
@@ -32,10 +31,36 @@ class ChessBroad:
                 else:
                     box_color = COLOR_WHITE
                 new_box = Box(self.box_size,i,j,box_color,False)
-                new_box.chesspos = (i,j)
+                new_box.chesspos = (int((i - self.box_size/2)/ self.box_size),int((j - self.box_size/2) / self.box_size))
                 row.append(new_box)
             self.box.append(row)
+    
+    def getBoxClicked(self,mouseX,mouseY):
+        for x in range(0,8):
+            for y in range(0,8):
+                if self.box[x][y].rect.collidepoint(mouseX, mouseY):
+                    return self.box[x][y]
+        return None
+    
+    def setState(self,gameState):
+        for (x,y) in gameState.chossingPiece.moveAblePos:
+            self.box[x][y].hint = True
+            if self.box[x][y].placed != None and self.box[x][y].placed.color != gameState.currentPlayer:
+                self.box[x][y].hightlight = True
+        (hightLightX, hightLightY) = (gameState.chossingPiece.x, gameState.chossingPiece.y)
+        self.box[hightLightX][hightLightY].hightlight = True
+    
+    def resetState(self):
+        for boxRow in self.box:
+            for box in boxRow:
+                box.hint = False
+                box.hightlight = False
+    
+    def onPlacing(self,gameState, nextPleyerPieces):
+        if gameState.boxClicked.placed in nextPleyerPieces:
+            nextPleyerPieces.remove(gameState.boxClicked.placed)
         
+    
     def display(self,surface = pygame.Surface,pos_x=0,pos_y=0):
         surface.blit(self.broad_sur,(pos_x,pos_y))
         for i in range(0,8):
