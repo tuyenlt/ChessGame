@@ -100,8 +100,9 @@ def runGame(mainbroad, white_player, black_player):
             piece.display()
         for piece in player["black"].pieces:
             piece.display()
-        text3 = font.render(f"TIMELEFT:{int(player["black"].countDown)}",True,COLOR_LBLUE)
-        text4 = font.render(f"TIMELEFT: {int(player["white"].countDown)}",True,COLOR_LBLUE)
+        text3 = font.render(f'TIMELEFT:{int(player["black"].countDown)}', True, COLOR_LBLUE)
+
+        text4 = font.render(f'TIMELEFT:{int(player["white"].countDown)}', True, COLOR_LBLUE)
             
         screen.blit(text1,(100,50))
         screen.blit(text2,(100,950))
