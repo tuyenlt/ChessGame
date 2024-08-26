@@ -51,15 +51,15 @@ def runGame(mainbroad, white_player, black_player):
                         mainbroad.setState(gameState)
                         
                         
-                        # for boxRow in mainbroad.box: # print chess table 
-                        #     for box in boxRow:
-                        #         if box.placed == None:
-                        #             print("  *  ", end=" ")
-                        #         elif box.placed == gameState.chossingPiece:
-                        #             print("choss",end=" ")
-                        #         else : print(box.placed.color, end=" ")
-                        #     print()
-                        # print("===============================================================")
+                        for boxRow in mainbroad.box: # print chess table 
+                            for box in boxRow:
+                                if box.placed == None:
+                                    print("  *  ", end=" ")
+                                elif box.placed == gameState.chossingPiece:
+                                    print("choss",end=" ")
+                                else : print(box.placed.color, end=" ")
+                            print()
+                        print("===============================================================")
                 gameState.boxClicked = mainbroad.getBoxClicked(mouse_x,mouse_y - 100)
                 # ===============================================================  handle move            
                 if (

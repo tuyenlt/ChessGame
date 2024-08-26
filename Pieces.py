@@ -35,8 +35,9 @@ class Chesspiece():
         self.x , self.y = box.chesspos
         if log :
             print(f"{type(self).__name__} {toChessMove(box.chesspos)}")
+            self.moved = True
         self.broad.box[self.x][self.y].placed = self
-        self.moved = True
+            
     
     def setBroad(self,broad):
         self.broad = broad
@@ -51,6 +52,7 @@ class Pawn(Chesspiece):
         super().__init__(spawn_x,spawn_y,color)
         self.image = pygame.image.load("lib/" + self.color + "_pawn.png")
         self.image = pygame.transform.scale(self.image,(self.size,self.size))
+        self.direction = 1
         
     def getMoveAblePos(self):
         self.moveAblePos = []
@@ -59,7 +61,7 @@ class Pawn(Chesspiece):
         if self.color == "white":
             direction = -1
             spawn_y = 6
-            
+        self.direction = direction    
         if self.broad.box[self.x][self.y+direction].placed == None:
             self.moveAblePos.append((self.x,self.y + direction)) 
             if self.y == spawn_y:   

@@ -51,6 +51,9 @@ class Player:
         moves = []
         for piece in self.pieces:
             piece.getMoveAblePos()
+            if type(piece).__name__ == "Pawn":
+                piece.moveAblePos.append((piece.x-1,piece.y + piece.direction))
+                piece.moveAblePos.append((piece.x+1,piece.y + piece.direction))
             for move in piece.moveAblePos:
                 moves.append(move)
         return moves
