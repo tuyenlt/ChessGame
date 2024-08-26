@@ -10,8 +10,6 @@ class GameState():
         self.isCheckMate = False
         self.currentPlayer = "white"
         self.nextPlayer = "black"
-        self.placed = False
-        self.destination = None 
         self.countDown = 1200
         self.chossingPiece = None
         self.boxClicked = None
